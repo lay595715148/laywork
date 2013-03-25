@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="utf-8"?>
+<config>
+  <actions auto-dispatch="true" dispatch-key="key" dispatch-scope="0" dispatch-style="do*" result="json">
+    <action name="index" auto-dispatch="false" dispatch-key="do" classname="IndexAction" result="json">
+      <bean>User</bean>
+      <bean>Doc</bean>
+      <service>UserService</service>
+      <service>DocService</service>
+    </action>
+    <action name="test.test" dispatch-key="do" classname="TestAction" result="json">
+      <bean>Test</bean>
+      <service>TestService</service>
+      <service>TestService-mysql</service>
+    </action>
+    <action name="test.test.test" dispatch-key="do" classname="TestAction" result="json">
+      <bean>Test</bean>
+      <service>TestService</service>
+      <service>TestService-mysql</service>
+    </action>
+    <action name="lay" dispatch-key="do" classname="IndexAction" result="text">
+      <bean>User</bean>
+      <bean>Doc</bean>
+      <service>UserService</service>
+      <service>DocService</service>
+    </action>
+    <action name="laywork..index" dispatch-key="do" classname="IndexAction" result="json">
+      <bean>User</bean>
+      <bean>Doc</bean>
+      <service>UserService</service>
+      <service>DocService</service>
+    </action>
+  </actions>
+  <beans scope="0" auto-build="true">
+    <bean name="User" classname="User" scope="0">
+      <property name="userid" default="1"></property>
+      <property name="username" default="username"></property>
+    </bean>
+    <bean name="Doc" classname="Doc">
+      <property name="docid" default="2"></property>
+      <property name="docname" default="docname"></property>
+    </bean>
+    <bean name="Test" classname="Test">
+      <property name="userid" default="2"></property>
+      <property name="username" default="username"></property>
+    </bean>
+  </beans>
+  <services auto-init="true">
+    <service name="UserService" classname="UserService" store="mysql-win"></service>
+    <service name="DocService" classname="DocService" store="json-win"></service>
+    <service name="TestService" classname="TestService" store="memory-win"></service>
+    <service name="TestService-mysql" classname="TestService" store="mysql-win"></service>
+  </services>
+  <stores encoding="UTF8" show-sql="false" auto-connect="true">
+    <store name="mysql" classname="Mysql" type="database" host="localhost" username="root" password="dcuxpasswd" database="test"></store>
+    <store name="mysql-win" classname="Mysql" type="database" host="localhost" username="root" password="dcuxpasswd" database="laywork" show-sql="true"></store>
+    <store name="json-win" classname="Json" type="json" host="data/json" dir="test" prefix="" suffix="">
+      <filename>user</filename>
+      <filename>doc</filename>
+    </store>
+    <store name="memory-win" classname="Memory" type="memory" host="data/memory" dir="test" prefix="" suffix="">
+      <filename>user</filename>
+      <filename>doc</filename>
+    </store>
+    <store name="ldap" classname="Ldap" type="ldap" host="localhost" userdn="cn=admin,dc=laywork,dc=laysoft,dc=cn" password="dcuxpasswd" basedn="dc=laywork,dc=laysoft,dc=cn"></store>
+  </stores>
+</config>

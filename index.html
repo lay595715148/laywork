@@ -1,0 +1,57 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD XHTML 4.01 Transitional//EN">
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>Index</title>
+    <script type="text/javascript" src="js/jquery.js"></script>
+    <script type="text/javascript">
+function callback(json) {
+    obj = json;
+    alert(json);
+}
+$(document).ready(function() {
+    $.query = function(url,params) {
+        if(url == '../index.php') {
+            $("body").append('<script type="text/javascript" src="../index.php?do=launch">' + '<' + '/script>');
+            //return true;
+        }
+        $.post(url,params,function(response) {
+            $("#out").html(response);
+        });
+    };
+    $("#index").click(function() {
+        $.query('index.php',{"key":"launch"});
+    });
+    $("#test-test").click(function() {
+        $.query('test/test.php',{"key":"launch"});
+    });
+    $("#test-test-test").click(function() {
+        $.query('test/test/test.php',{"key":"launch"});
+    });
+    $("#lay").click(function() {
+        $.query('lay.php',{"key":"launch"});
+    });
+    $("#lay_do").click(function() {
+        $.query('lay.php',{"do":"launch"});
+    });
+    $("#laywork_index_do").click(function() {
+        $.query('../index.php',{"do":"launch"});
+    });
+    $("#laywork_index").click(function() {
+        $.query('../index.php',{"key":"launch"});
+    });
+});
+    </script>
+</head>
+<body>
+  <div class="header" style="height:80px;">
+  <input id="index" type="button" name="index" value="index.php?key=launch"></input>
+  <input id="test-test" type="button" name="test-test" value="test/test.php?key=launch"></input>
+  <input id="test-test-test" type="button" name="test-test-test" value="test/test/test.php?key=launch"></input>
+  <input id="lay" type="button" name="lay" value="lay.php?key=launch"></input>
+  <input id="lay_do" type="button" name="lay_do" value="lay.php?do=launch"></input>
+  <input id="laywork_index_do" type="button" name="laywork..index_do" value="../index.php?do=launch"></input>
+  <input id="laywork_index" type="button" name="laywork..index" value="../index.php?key=launch"></input>
+  </div>
+  <div id="out"></div>
+</body>
